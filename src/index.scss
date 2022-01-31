@@ -1,0 +1,125 @@
+$color-tone-1: #d7dadc;
+$color-tone-2: #818384;
+$color-tone-3: #565758;
+$color-tone-4: #3a3a3c;
+$color-tone-5: #272729;
+$color-tone-6: #1a1a1b;
+$color-tone-7: #121213;
+$color-green: #538d4e;
+$color-yellow: #b59f3b;
+$opacity-50: rgba(0, 0, 0, 0.5);
+$base-font-size: 16px;
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  height: 100%;
+  font-size: $base-font-size;
+
+  body {
+    height: 100%;
+    color: $color-tone-1;
+
+    #root {
+      height: 100%;
+      background-color: $color-tone-7;
+      width: 500px;
+      margin: auto;
+
+      header {
+        text-align: center;
+        font-weight: bold;
+        font-size: 2rem;
+        padding: 10px 0;
+        border-bottom: 1px solid $color-tone-4;
+      }
+
+      .board {
+        padding: 90px;
+
+        .letters-row {
+          display: flex;
+          justify-content: space-between;
+          margin-bottom: 5px;
+
+          .letter-tile {
+            width: 60px;
+            height: 60px;
+            border: 1px solid $color-tone-3;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            line-height: 2rem;
+            font-weight: bold;
+            vertical-align: middle;
+            box-sizing: border-box;
+            text-transform: uppercase;
+            user-select: none;
+
+            &.collect {
+              background-color: $color-green;
+            }
+
+            &.present {
+              background-color: $color-yellow;
+            }
+
+            &.absent {
+              background-color: $color-tone-4;
+            }
+          }
+        }
+      }
+
+      #keyboard {
+        height: 200px;
+        position: fixed;
+        bottom: 0;
+        margin: 0 8px;
+        user-select: none;
+        width: 484px;
+
+        .row {
+          display: flex;
+          width: 100%;
+          margin: 0 auto 8px;
+          touch-action: manipulation;
+
+          .key {
+            font-size: .8rem;
+            font-family: inherit;
+            font-weight: bold;
+            border: 0;
+            padding: 0;
+            margin: 0 6px 0 0;
+            height: 58px;
+            border-radius: 4px;
+            cursor: pointer;
+            user-select: none;
+            background-color: $color-tone-2;
+            color: $color-tone-1;
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-transform: uppercase;
+            -webkit-tap-highlight-color: rgba(0,0,0,0.3);
+          }
+
+          .half {
+            flex: 0.5;
+          }
+
+          .one-and-a-half {
+            flex: 1.5;
+            font-size: 12px;
+          }
+        }
+      }
+    }
+  }
+}
