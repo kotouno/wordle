@@ -1,16 +1,26 @@
 import LettersRow from './letters-row'
 
+type LetterState = {
+  state: string;
+  letter: string;
+}
+type LetterRowState = {
+  state: string;
+  letterStates: LetterState[];
+}
 type Props = {
-  answerLetters: string[][]
-  answerWord: string
-  enterCount: number
+  letterRowStates: LetterRowState[]
 }
 
 const Board = (props: Props) => {
   return (
     <div className="board">
-      {props.answerLetters.map((letters: string[], i: number) =>
-        <LettersRow key={i} letters={letters} answerWord={props.answerWord} isEntered={i < props.enterCount} />
+      {props.letterRowStates.map((letterRowState, i) =>
+        <LettersRow
+          key={i}
+          state={letterRowState.state}
+          letterStates={letterRowState.letterStates}
+        />
       )}
     </div>
   )

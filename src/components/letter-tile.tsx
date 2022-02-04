@@ -1,11 +1,11 @@
 type Props = {
   letter: string
-  status: string
+  state: string
 }
 
 const LetterTile = (props: Props) => {
   return (
-    <div className={`letter-tile ${props.status}`}>
+    <div className={`letter-tile ${props.state}`}>
       {props.letter}
     </div>
   )

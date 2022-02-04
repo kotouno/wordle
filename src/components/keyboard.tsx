@@ -5,28 +5,71 @@ import LetterKey from './letter-key'
 type Props = {
   addLetter: Function
   deleteLetter: Function
-  enter: Function
+  answer: Function
+  correctLetters: string[]
+  presentLetters: string[]
+  absentLetters: string[]
 }
 
 const LetterKeyboard = (props: Props) => {
+  const keyboardLetters: string[][] = [
+    ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'],
+    ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L'],
+    ['Z', 'X', 'C', 'V', 'B', 'N', 'M'],
+  ]
+
+  type LetterWithStatus = {
+    status: string
+    letter: string
+  }
+
+  const keyboardLettersWithStatus: LetterWithStatus[][] = keyboardLetters.map((letters) => {
+    return letters.map((letter) => {
+      let status: string = ''
+      if (props.correctLetters.includes(letter)) {
+        status = 'correct'
+      } else if (props.presentLetters.includes(letter)) {
+        status = 'present'
+      } else if (props.absentLetters.includes(letter)) {
+        status = 'absent'
+      }
+      return { letter, status }
+    })
+  })
+
   return (
     <div id="keyboard">
       <div className="row">
-        {['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'].map((letter: string, i: number) =>
-          <LetterKey key={i} letter={letter} addLetter={props.addLetter} />
+        {keyboardLettersWithStatus[0].map((letterWithStatus, i) =>
+          <LetterKey
+            key={i}
+            letter={letterWithStatus.letter}
+            status={letterWithStatus.status}
+            addLetter={props.addLetter}
+          />
         )}
       </div>
       <div className="row">
         <div className="spacer half"></div>
-        {['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L'].map((letter: string, i: number) =>
-          <LetterKey key={i} letter={letter} addLetter={props.addLetter} />
+        {keyboardLettersWithStatus[1].map((letterWithStatus, i) =>
+          <LetterKey
+            key={i}
+            letter={letterWithStatus.letter}
+            status={letterWithStatus.status}
+            addLetter={props.addLetter}
+          />
         )}
         <div className="spacer half"></div>
       </div>
       <div className="row">
-        <EnterKey enter={props.enter} />
-        {['Z', 'X', 'C', 'V', 'B', 'N', 'M'].map((letter: string, i: number) =>
-          <LetterKey key={i} letter={letter} addLetter={props.addLetter} />
+        <EnterKey answer={props.answer} />
+        {keyboardLettersWithStatus[2].map((letterWithStatus, i) =>
+          <LetterKey
+            key={i}
+            letter={letterWithStatus.letter}
+            status={letterWithStatus.status}
+            addLetter={props.addLetter}
+          />
         )}
         <DeleteKey deleteLetter={props.deleteLetter} />
       </div>

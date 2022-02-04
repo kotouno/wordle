@@ -1,10 +1,10 @@
 type Props = {
-  enter: Function
+  answer: Function
 }
 
 const Enter = (props: Props) => {
   return (
-    <div className="one-and-a-half key" onClick={() => props.enter()}>enter</div>
+    <div className="one-and-a-half key" onClick={() => props.answer()}>enter</div>
   )
 }
 
