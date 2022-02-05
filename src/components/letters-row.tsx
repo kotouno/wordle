@@ -1,13 +1,11 @@
 import LetterTile from './letter-tile'
 
-type LetterState = {
-  state: string
-  letter: string
-}
-
 type Props = {
   state: string
-  letterStates: LetterState[]
+  letterStates: {
+    state: string
+    letter: string
+  }[]
 }
 
 const LettersRow = (props: Props) => {

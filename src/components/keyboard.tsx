@@ -21,9 +21,9 @@ const LetterKeyboard = (props: Props) => {
   type LetterWithStatus = {
     status: string
     letter: string
-  }
+  }[][]
 
-  const keyboardLettersWithStatus: LetterWithStatus[][] = keyboardLetters.map((letters) => {
+  const keyboardLettersWithStatus: LetterWithStatus = keyboardLetters.map((letters) => {
     return letters.map((letter) => {
       let status: string = ''
       if (props.correctLetters.includes(letter)) {

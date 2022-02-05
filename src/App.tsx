@@ -5,32 +5,29 @@ import Board from './components/board'
 import Keyboard from './components/keyboard'
 
 function App() {
-  const answerWord: string = 'UNCHI'
+  const answerWord: string = 'REACT'
 
-  type LetterState = {
-    state: string;
-    letter: string;
-  }
   type LetterRowState = {
     state: string;
-    letterStates: LetterState[];
-  }
-  const InitialLetterRowStates: LetterRowState[] = []
+    letterStates: {
+      state: string;
+      letter: string;
+    }[]
+  }[]
+  const InitialLetterRowStates: LetterRowState = []
   for (let i = 0; i < 6; i++) {
-    const state: string = i === 0 ? 'isInputting' : ''
-    const letterRowState: LetterRowState = {
-      state,
+    InitialLetterRowStates.push({
+      state: '',
       letterStates: []
-    }
-    for (let i = 0; i < 5; i++) {
-      letterRowState.letterStates.push({
+    })
+    for (let n = 0; n < 5; n++) {
+      InitialLetterRowStates[i].letterStates.push({
         state: '',
         letter: '',
       })
     }
-    InitialLetterRowStates.push(letterRowState)
   }
-  const [letterRowStates, setLetterRowStates] = useState<LetterRowState[]>(InitialLetterRowStates)
+  const [letterRowStates, setLetterRowStates] = useState<LetterRowState>(InitialLetterRowStates)
   const [isClear, setClearStatus] = useState<boolean>(false)
   const [isChecking, setChekingState] = useState<boolean>(false)
   const [answeredCount, setAnsweredCount] = useState<number>(0)
@@ -41,7 +38,7 @@ function App() {
   const [message, setMessage] = useState<string>('')
 
   const addLetter = (letter: string) => {
-    if (letterCount < 5 && answeredCount !== 6) {
+    if (letterCount < 5 && answeredCount < 6) {
       setLetterRowStates((prevState) => {
         const copyForUpdate = prevState.slice()
         copyForUpdate[answeredCount].letterStates[letterCount] = {
@@ -97,7 +94,6 @@ function App() {
             promiseList.push(promise)
           }
 
-          // 上記チェック終了後更新
           Promise.all(promiseList).then(() => {
             letterRowStates[answeredCount].letterStates.forEach((letterState, i) => {
               if (letterState.letter === answerWord[i]) {

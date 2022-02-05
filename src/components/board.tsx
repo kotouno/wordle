@@ -1,15 +1,13 @@
 import LettersRow from './letters-row'
 
-type LetterState = {
-  state: string;
-  letter: string;
-}
-type LetterRowState = {
-  state: string;
-  letterStates: LetterState[];
-}
 type Props = {
-  letterRowStates: LetterRowState[]
+  letterRowStates: {
+    state: string;
+    letterStates: {
+      state: string;
+      letter: string;
+    }[];
+  }[];
 }
 
 const Board = (props: Props) => {
